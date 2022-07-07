@@ -1,0 +1,8 @@
+.idea
+csv
+cachedatas
+*.data
+**/__pycache__
+
+images
+spider_cst.py
