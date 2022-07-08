@@ -20,7 +20,6 @@ post_id = ''
 while True:
     spider = Spider(spider_name='DySpider')
     response = spider.requests(method='get', url=url)
-    print(response.text)
 
     html = Selector(response.text)
     items = html.css('.post-title')
@@ -31,6 +30,7 @@ while True:
     title = item.xpath('.// a/text()').get()
     print(pid)
     if pid != post_id:
+        print(response.text)
         log_and_send_im(f"电鸭有新的职位信息: {pid} {title} {url}")
         post_id = pid
     time.sleep(15 * 60)
