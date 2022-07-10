@@ -31,6 +31,6 @@ while True:
     print(pid)
     if pid != post_id:
         print(response.text)
-        log_and_send_im(f"电鸭有新的职位信息: {pid} {title} {url}")
+        log_and_send_im(f"电鸭 有新的职位信息: {pid} {title} {url}")
         post_id = pid
     time.sleep(16 * 60)
