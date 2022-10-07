@@ -10,7 +10,7 @@
 import time
 
 from parsel import Selector
-
+import json
 from utils.base_spider import Spider
 from utils.im_util import log_and_send_im
 
@@ -22,12 +22,15 @@ while True:
     response = spider.requests(method='get', url=url)
 
     html = Selector(response.text)
-    items = html.css('.post-title')
+    items_json_text = html.css('#__NEXT_DATA__ ::text').get()
+    items_dict = json.loads(items_json_text)
+
+    items = items_dict['props']['initialProps']['pageProps']['postList']['posts']
     print(len(items))
     item = items[0]
 
-    pid = item.xpath('.// a/@href').get()
-    title = item.xpath('.// a/text()').get()
+    pid = item.get('id')
+    title = item.get('title')
     print(pid)
     if pid != post_id:
         print(response.text)
