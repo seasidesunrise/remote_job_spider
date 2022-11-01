@@ -15,7 +15,8 @@ from utils.base_spider import Spider
 from utils.im_util import log_and_send_im
 
 url = "https://eleduck.com/categories/5?sort=new"
-post_id = ''
+last_post_id = ''
+last_title = ''
 
 while True:
     spider = Spider(spider_name='DySpider')
@@ -32,8 +33,9 @@ while True:
     pid = item.get('id')
     title = item.get('title')
     print(pid)
-    if pid != post_id:
+    if pid != last_post_id and title != last_title:
         print(response.text)
         log_and_send_im(f"电鸭 有新的职位信息: {pid} {title} {url}")
-        post_id = pid
+        last_post_id = pid
+        last_title = title
     time.sleep(16 * 60)
