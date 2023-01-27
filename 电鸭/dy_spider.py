@@ -32,10 +32,14 @@ while True:
 
     pid = item.get('id')
     title = item.get('title')
-    print(pid)
+    print(pid, title)
+    print(f"pid: {pid}, title: {title}")
+    print(f"last_post_id: {last_post_id}, last_title: {last_title}")
     if pid != last_post_id and title != last_title:
-        print(response.text)
+        # print(response.text)
         log_and_send_im(f"电鸭 有新的职位信息: {pid} {title} {url}")
         last_post_id = pid
         last_title = title
-    time.sleep(16 * 60)
+    else:
+        print(f"重复的工作，忽略")
+    time.sleep(5 * 60)
